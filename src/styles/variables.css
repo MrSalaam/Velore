@@ -1,0 +1,16 @@
+:root {
+  --primary-color: #228B22; /* Forest Green */
+  --secondary-color: #F5F5F5; /* Complementary neutral */
+  --background-color: #FFFFFF; /* White */
+  --text-color: #333333; /* Dark gray */
+  --accent-color: #FFD700; /* Gold for CTAs and highlights */
+  
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --border-radius-small: 4px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 12px;
+
+  --transition-speed: 0.3s;
+}
