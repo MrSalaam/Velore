@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Star, Heart, ShoppingCart, Send, Quote } from 'lucide-react';
+import { MdShoppingCartCheckout } from "react-icons/md";
 import { Product } from '../types';
 import { Button } from '../components/common/Button';
 import { ProductCard } from '../components/product/ProductCard';
@@ -9,7 +10,7 @@ import { useWishlist } from '../hooks/useLocalStorage';
 import { formatCurrency } from '../utils/formatters';
 import { toast } from 'react-hot-toast';
 
-// Mock data for hero slides
+
 const heroSlides = [
   {
     id: 1,
@@ -44,7 +45,7 @@ const categories = [
     name: "Men's Fragrances",
     description: 'Bold and sophisticated scents',
     tagline: 'Confidence in Every Note',
-    image: 'https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=800',
+    image: '/images/bleu.jpg',
     icon: '♂',
     link: '/shop?category=men',
   },
@@ -53,7 +54,7 @@ const categories = [
     name: "Women's Fragrances",
     description: 'Elegant and enchanting perfumes',
     tagline: 'Elegance Captured in Essence',
-    image: 'https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=800',
+    image: '/images/tomford.jpg',
     icon: '♀',
     link: '/shop?category=women',
   },
@@ -62,7 +63,7 @@ const categories = [
     name: 'Unisex Fragrances',
     description: 'Versatile scents for everyone',
     tagline: 'Beyond Boundaries',
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800',
+    image: '/images/molecule.jpg',
     icon: '◈',
     link: '/shop?category=unisex',
   },
@@ -327,6 +328,11 @@ export const Home: React.FC = () => {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
+  // Add this for debugging
+  useEffect(() => {
+    console.log('Wishlist hook loaded');
+  }, []);
+
   // Hero carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -423,9 +429,9 @@ export const Home: React.FC = () => {
   };
 
   const handleToggleWishlist = (productId: string) => {
+    const wasInWishlist = isInWishlist(productId);
     toggleWishlist(productId);
-    const isAdded = !isInWishlist(productId);
-    toast.success(isAdded ? 'Added to wishlist' : 'Removed from wishlist');
+    toast.success(wasInWishlist ? 'Removed from wishlist' : 'Added to wishlist');
   };
 
   // Navigation functions for best sellers
@@ -474,9 +480,6 @@ export const Home: React.FC = () => {
             }`}
           >
             
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 via-transparent to-teal-900/30 z-10 mix-blend-multiply" />
             
             {/* Video with Enhanced Effects */}
             <video
@@ -533,12 +536,8 @@ export const Home: React.FC = () => {
       </section>
 
     {/* Categories Section - Premium Redesign */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-slate-50 via-white to-slate-50 overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-3xl"></div>
-        </div>
+      <section className="relative py-20 md:py-28 bg-white overflow-hidden">
+       
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
@@ -591,16 +590,9 @@ export const Home: React.FC = () => {
                       loading="lazy"
                     />
 
-                    {/* Category Icon - Floating */}
-                    <div className="absolute top-6 right-6 z-30">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white text-2xl font-light group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                        {category.icon}
-                      </div>
-                    </div>
-
                     {/* Premium Badge */}
                     <div className="absolute top-6 left-6 z-30">
-                      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg backdrop-blur-sm border border-white/20 tracking-wider">
+                      <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-semibold px-4 py-2 rounded-full border border-white/20 tracking-wider">
                         PREMIUM
                       </div>
                     </div>
@@ -641,31 +633,16 @@ export const Home: React.FC = () => {
                       />
                     </div>
                   </div>
-
-                  {/* Border Glow Effect */}
-                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-emerald-400/50 transition-all duration-500 pointer-events-none"></div>
                 </div>
-
-                {/* Floating Decorative Element */}
-                <div className={`absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none`}></div>
               </Link>
             ))}
-          </div>
-
-          {/* Bottom Accent Line */}
-          <div className="mt-16 md:mt-20 flex justify-center">
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent rounded-full"></div>
           </div>
         </div>
       </section>
 
       {/* Featured Products Grid - Premium Redesign */}
       <section className="relative py-20 md:py-28 bg-white overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-10 right-20 w-96 h-96 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-20 w-80 h-80 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full blur-3xl"></div>
-        </div>
+        
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
@@ -689,7 +666,7 @@ export const Home: React.FC = () => {
 
             {/* View All Button */}
             <Link to="/shop" className="group">
-              <div className="flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-3 px-8 py-4 bg-emerald-600 text-white rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <span className="font-medium">View All Collection</span>
                 <ChevronRight 
                   size={20} 
@@ -730,7 +707,7 @@ export const Home: React.FC = () => {
                     {/* Discount Badge */}
                     {product.discount && (
                       <div className="absolute top-4 left-4 z-30">
-                        <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg animate-pulse">
+                        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg animate-pulse">
                           SAVE {product.discount}%
                         </div>
                       </div>
@@ -758,7 +735,7 @@ export const Home: React.FC = () => {
                         onClick={() => handleAddToCart(product)}
                         className="w-full bg-white/95 backdrop-blur-sm text-gray-900 font-semibold py-3 px-4 rounded-full hover:bg-emerald-600 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-xl"
                       >
-                        <ShoppingCart size={18} />
+                        <MdShoppingCartCheckout size={18} />
                         <span>Add to Cart</span>
                       </button>
                     </div>
@@ -857,25 +834,10 @@ export const Home: React.FC = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/* Hover Border Glow */}
-                  <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-emerald-400/30 transition-all duration-500 pointer-events-none"></div>
                 </div>
-
-                {/* Floating Shadow Effect */}
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-6 bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </div>
             ))}
-          </div>
-
-          {/* Bottom Decorative Element */}
-          <div className="mt-16 flex justify-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-              <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></div>
-              <div className="w-2 h-2 rounded-full bg-teal-400"></div>
-            </div>
-          </div>
+          </div>        
         </div>
       </section>
 
@@ -1288,7 +1250,7 @@ export const Home: React.FC = () => {
           <div className="mt-12 flex justify-center">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-              <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-400 rounded-full"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></div>
               <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
             </div>
           </div>

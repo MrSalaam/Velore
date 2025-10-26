@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import Account from './pages/Account';
 import Orders from './pages/Orders';
+import Wishlist from './pages/Wishlist';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
@@ -24,6 +25,7 @@ const AppRouter: React.FC = () => {
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/account" element={<Account />} />
         <Route path="/orders/:id" element={<Orders />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
