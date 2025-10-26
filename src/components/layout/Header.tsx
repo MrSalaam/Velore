@@ -27,12 +27,13 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <motion.header
-      className="bg-white sticky top-0 z-50 shadow-sm"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
+    <>
+      <motion.header
+        className="bg-white sticky top-0 z-50 shadow-sm"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
       {/* Main Header */}
       <div className="border-b border-gray-100">
         <div className="container mx-auto px-4">
@@ -333,13 +334,13 @@ export const Header: React.FC = () => {
       {/* Mobile Search Overlay */}
       {isSearchOpen && (
         <motion.div
-          className="lg:hidden border-b border-gray-200 bg-white"
+          className="lg:hidden  border-gray-200 bg-white z-40 my-2"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="container mx-auto px-4 py-4">
+          <div className="container mx-auto my-2 px-4 py-8">
             <SearchBar />
           </div>
         </motion.div>
@@ -438,13 +439,10 @@ export const Header: React.FC = () => {
         </motion.div>
       )}
 
+      </motion.header>
+
       {/* Mobile Bottom Navigation */}
-      <motion.div
-        className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 overflow-hidden"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-      >
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
         <div className="flex items-center w-full py-2 px-2">
           {/* Home */}
           <Link
@@ -491,7 +489,7 @@ export const Header: React.FC = () => {
             <span className="text-xs font-medium">Cart</span>
           </button>
         </div>
-      </motion.div>
-    </motion.header>
+      </div>
+    </>
   );
 };
