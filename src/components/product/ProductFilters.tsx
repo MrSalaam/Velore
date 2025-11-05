@@ -100,51 +100,53 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6">
+    <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 p-4 sm:p-6 lg:p-8 shadow-lg sm:shadow-xl max-h-[85vh] sm:max-h-[80vh] lg:max-h-[70vh] overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
+      <div className="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8 sticky top-0 bg-white z-10 pb-3 sm:pb-4 border-b border-gray-100">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900">Filters</h3>
         {activeFilterCount > 0 && (
           <Button
             variant="ghost"
             size="sm"
             onClick={onClearFilters}
-            rightIcon={<X size={14} />}
+            rightIcon={<X size={14} className="sm:w-4 sm:h-4" />}
+            className="text-emerald-600 hover:text-emerald-700 font-semibold text-xs sm:text-sm"
           >
-            Clear All ({activeFilterCount})
+            <span className="hidden xs:inline">Clear All ({activeFilterCount})</span>
+            <span className="xs:hidden">Clear ({activeFilterCount})</span>
           </Button>
         )}
       </div>
 
       {/* Category Filter */}
-      <div className="mb-6 pb-6 border-b border-gray-200">
-        <h4 className="font-medium text-gray-900 mb-3">Category</h4>
-        <div className="space-y-2">
+      <div className="mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 lg:pb-8 border-b border-gray-200">
+        <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 text-base sm:text-lg">Category</h4>
+        <div className="space-y-2 sm:space-y-3">
           {categories.map((cat) => (
             <label
               key={cat.value}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors group"
             >
               <input
                 type="checkbox"
                 checked={activeFilters.category === cat.value}
                 onChange={() => handleCategoryChange(cat.value as 'men' | 'women' | 'unisex')}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 focus:ring-2 cursor-pointer"
               />
-              {cat.label}
+              <span className="font-medium group-hover:text-emerald-600 transition-colors">{cat.label}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Price Range Filter */}
-      <div className="mb-6 pb-6 border-b border-gray-200">
-        <h4 className="font-medium text-gray-900 mb-3">Price Range</h4>
-        <div className="space-y-2">
+      <div className="mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 lg:pb-8 border-b border-gray-200">
+        <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 text-base sm:text-lg">Price Range</h4>
+        <div className="space-y-2 sm:space-y-3">
           {priceRanges.map((range) => (
             <label
               key={range.label}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors group"
             >
               <input
                 type="checkbox"
@@ -153,92 +155,99 @@ export const ProductFilters: React.FC<ProductFiltersProps> = ({
                   activeFilters.maxPrice === range.max
                 }
                 onChange={() => handlePriceChange(range.min, range.max)}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 focus:ring-2 cursor-pointer"
               />
-              {range.label}
+              <span className="font-medium group-hover:text-emerald-600 transition-colors">{range.label}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Brand Filter */}
-      <div className="mb-6 pb-6 border-b border-gray-200">
-        <h4 className="font-medium text-gray-900 mb-3">Brand</h4>
-        <div className="space-y-2 max-h-48 overflow-y-auto">
+      <div className="mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 lg:pb-8 border-b border-gray-200">
+        <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 text-base sm:text-lg">Brand</h4>
+        <div className="space-y-2 sm:space-y-3 max-h-48 sm:max-h-56 lg:max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-emerald-300 scrollbar-track-gray-100 hover:scrollbar-thumb-emerald-400 pr-2">
           {brands.map((brand) => (
             <label
               key={brand}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors group"
             >
               <input
                 type="checkbox"
                 checked={activeFilters.brand === brand}
                 onChange={() => handleBrandChange(brand)}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 focus:ring-2 cursor-pointer"
               />
-              {brand}
+              <span className="font-medium group-hover:text-emerald-600 transition-colors">{brand}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Size Filter */}
-      <div className="mb-6 pb-6 border-b border-gray-200">
-        <h4 className="font-medium text-gray-900 mb-3">Size</h4>
-        <div className="space-y-2">
+      <div className="mb-4 sm:mb-6 lg:mb-8 pb-4 sm:pb-6 lg:pb-8 border-b border-gray-200">
+        <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 text-base sm:text-lg">Size</h4>
+        <div className="grid grid-cols-2 sm:grid-cols-1 gap-2 sm:gap-3">
           {sizes.map((size) => (
             <label
               key={size}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors group"
             >
               <input
                 type="checkbox"
                 checked={activeFilters.size === size}
                 onChange={() => handleSizeChange(size)}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 focus:ring-2 cursor-pointer"
               />
-              {size}
+              <span className="font-medium group-hover:text-emerald-600 transition-colors">{size}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Rating Filter */}
-      <div>
-        <h4 className="font-medium text-gray-900 mb-3">Rating</h4>
-        <div className="space-y-2">
+      <div className="mb-4 sm:mb-6 lg:mb-8">
+        <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 text-base sm:text-lg">Rating</h4>
+        <div className="space-y-2 sm:space-y-3">
           {ratings.map((rating) => (
             <label
               key={rating}
-              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700 hover:text-gray-900"
+              className="flex items-center gap-2 sm:gap-3 cursor-pointer text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors group"
             >
               <input
                 type="checkbox"
                 checked={activeFilters.rating === rating}
                 onChange={() => handleRatingChange(rating)}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 focus:ring-2 cursor-pointer"
               />
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 sm:gap-1.5">
                 {Array.from({ length: 5 }, (_, i) => (
                   <span
                     key={i}
-                    className={i < rating ? 'text-yellow-400' : 'text-gray-300'}
+                    className={`text-sm sm:text-base ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
                   >
                     ★
                   </span>
                 ))}
-                <span className="ml-1">& Up</span>
+                <span className="ml-1 sm:ml-2 font-medium group-hover:text-emerald-600 transition-colors">& Up</span>
               </div>
             </label>
           ))}
         </div>
       </div>
-      <button
-        onClick={handleApplyFilters}
-        className="bg-purple-600 text-white rounded p-2 w-full"
-      >
-        Apply Filters
-      </button>
+
+      {/* Apply Filters Button */}
+      <div className="sticky bottom-0 bg-white pt-4 sm:pt-6 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pb-2 sm:pb-0 border-t border-gray-100">
+        <Button
+          onClick={handleApplyFilters}
+          variant="primary"
+          size="lg"
+          fullWidth
+          className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 sm:py-4 rounded-full transition-all duration-300 active:scale-95 sm:hover:scale-105 shadow-lg hover:shadow-xl text-sm sm:text-base"
+        >
+          Apply Filters
+        </Button>
+      </div>
     </div>
   );
 };

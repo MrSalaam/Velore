@@ -38,11 +38,11 @@ export const Footer: React.FC = () => {
               </div>
               <div className="-ml-3 flex flex-col">
                   {/* Logo Text */}
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent font-libertinus-keyboard">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-wider">
                   VELORÉ
                 </h1>
                 {/* Tagline */}
-                <p className="text-xs text-gray-800 font-medium tracking-wide font-dancing-script">LUXURY PERFUMES...</p>
+                <p className="text-xs pl-1 text-gray-800 font-medium tracking-wide">LUXURY PERFUMES...</p>
               </div>
             </Link>
             

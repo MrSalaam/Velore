@@ -172,21 +172,31 @@ export const Wishlist: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center gap-6">
             <Link
               to="/"
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center gap-3 text-gray-600 hover:text-emerald-600 transition-all duration-300 font-medium"
             >
               <ArrowLeft size={20} />
               <span>Back to Home</span>
             </Link>
-            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="h-8 w-px bg-gray-300"></div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">My Wishlist</h1>
-              <p className="text-gray-600 mt-1">
+              <div className="inline-block mb-4">
+                <span className="text-emerald-600 font-medium text-sm tracking-[0.3em] uppercase">
+                  Your Favorites
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-gray-900 mb-4 tracking-tight">
+                My
+                <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mt-2">
+                  Wishlist
+                </span>
+              </h1>
+              <p className="text-gray-600 text-lg mt-4">
                 {wishlistProducts.length} {wishlistProducts.length === 1 ? 'item' : 'items'} saved
               </p>
             </div>
@@ -196,7 +206,7 @@ export const Wishlist: React.FC = () => {
             <Button
               onClick={handleClearWishlist}
               variant="outline"
-              className="text-red-600 border-red-300 hover:bg-red-50"
+              className="text-red-600 border-red-300 hover:bg-red-50 font-semibold px-6 py-3 rounded-full border-2 hover:border-red-400 transition-all duration-300 hover:scale-105"
             >
               Clear All
             </Button>
@@ -205,16 +215,16 @@ export const Wishlist: React.FC = () => {
 
         {/* Empty State */}
         {wishlistProducts.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart size={32} className="text-gray-400" />
+          <div className="text-center py-20">
+            <div className="w-32 h-32 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+              <Heart size={48} className="text-emerald-400" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Your wishlist is empty</h2>
-            <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Your wishlist is empty</h2>
+            <p className="text-gray-600 text-lg mb-10 max-w-md mx-auto leading-relaxed">
               Start adding your favorite fragrances to your wishlist to keep track of items you love.
             </p>
             <Link to="/shop">
-              <Button variant="primary" size="lg">
+              <Button variant="primary" size="lg" className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
                 Browse Products
               </Button>
             </Link>
@@ -335,9 +345,9 @@ export const Wishlist: React.FC = () => {
             </div>
 
             {/* Bulk Actions */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
-              <div className="flex flex-wrap gap-4">
+            <div className="bg-white rounded-3xl shadow-xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h3>
+              <div className="flex flex-wrap gap-6">
                 <Button
                   onClick={() => {
                     wishlistProducts.forEach(product => {
@@ -348,12 +358,13 @@ export const Wishlist: React.FC = () => {
                     toast.success('All available items added to cart');
                   }}
                   variant="primary"
-                  leftIcon={<ShoppingCart size={18} />}
+                  leftIcon={<ShoppingCart size={20} />}
+                  className="px-8 py-4 rounded-full font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Add All to Cart
                 </Button>
                 <Link to="/shop">
-                  <Button variant="outline">
+                  <Button variant="outline" className="px-8 py-4 rounded-full font-semibold border-2 hover:bg-emerald-50 hover:border-emerald-400 transition-all duration-300">
                     Continue Shopping
                   </Button>
                 </Link>

@@ -416,12 +416,22 @@ export const Shop: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Shop Perfumes</h1>
-          <p className="text-gray-600">
-            Discover our complete collection of luxury fragrances
+        <div className="text-center mb-16 md:mb-20">
+          <div className="inline-block mb-4">
+            <span className="text-emerald-600 font-medium text-sm tracking-[0.3em] uppercase">
+              Explore Our Collection
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-gray-900 mb-6 tracking-tight">
+            Shop
+            <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mt-2">
+              Perfumes
+            </span>
+          </h1>
+          <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Discover our complete collection of luxury fragrances crafted for the discerning individual
           </p>
         </div>
 
@@ -440,26 +450,28 @@ export const Shop: React.FC = () => {
           {/* Main Content */}
           <div className="flex-1 min-w-0">
             {/* Toolbar */}
-            <div className="bg-white rounded-lg shadow p-4 mb-6">
-              <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="bg-white rounded-3xl shadow-xl p-6 mb-8">
+              <div className="flex flex-wrap items-center justify-between gap-6">
                 {/* Results Count */}
                 <div className="text-gray-600">
-                  <span className="font-semibold text-gray-900">
+                  <span className="font-bold text-gray-900 text-lg">
                     {sortedProducts.length}
                   </span>{' '}
-                  {sortedProducts.length === 1 ? 'product' : 'products'} found
+                  <span className="text-base">
+                    {sortedProducts.length === 1 ? 'product' : 'products'} found
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-4">
                   {/* Mobile Filter Button */}
                   <button
                     onClick={() => setShowMobileFilters(true)}
-                    className="lg:hidden flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="lg:hidden flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
                     <Filter size={18} />
-                    Filters
+                    <span className="font-medium">Filters</span>
                     {activeFilterCount > 0 && (
-                      <span className="bg-indigo-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                      <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                         {activeFilterCount}
                       </span>
                     )}
@@ -470,7 +482,7 @@ export const Shop: React.FC = () => {
                     <select
                       value={sortBy}
                       onChange={(e) => handleSortChange(e.target.value as SortOption)}
-                      className="appearance-none px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white cursor-pointer"
+                      className="appearance-none px-6 py-3 pr-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white cursor-pointer font-medium transition-all duration-300 hover:border-emerald-400"
                     >
                       <option value="featured">Featured</option>
                       <option value="price-asc">Price: Low to High</option>
@@ -480,17 +492,17 @@ export const Shop: React.FC = () => {
                     </select>
                     <ChevronDown
                       size={18}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400"
                     />
                   </div>
 
                   {/* View Toggle */}
-                  <div className="hidden sm:flex items-center gap-2 border border-gray-300 rounded-lg p-1">
+                  <div className="hidden sm:flex items-center gap-2 border border-gray-300 rounded-full p-1">
                     <button
                       onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded transition-colors ${
+                      className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
                         viewMode === 'grid'
-                          ? 'bg-indigo-600 text-white'
+                          ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg'
                           : 'text-gray-600 hover:bg-gray-100'
                       }`}
                       aria-label="Grid view"
@@ -499,9 +511,9 @@ export const Shop: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className={`p-2 rounded transition-colors ${
+                      className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
                         viewMode === 'list'
-                          ? 'bg-indigo-600 text-white'
+                          ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg'
                           : 'text-gray-600 hover:bg-gray-100'
                       }`}
                       aria-label="List view"
@@ -514,36 +526,36 @@ export const Shop: React.FC = () => {
 
               {/* Active Filters */}
               {activeFilterCount > 0 && (
-                <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-200">
-                  <span className="text-sm text-gray-600">Active filters:</span>
+                <div className="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-gray-200">
+                  <span className="text-sm text-gray-600 font-medium">Active filters:</span>
                   {filters.category && (
-                    <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-sm px-4 py-2 rounded-full font-medium">
                       {filters.category}
                       <button
                         onClick={() =>
                           setFilters((prev) => ({ ...prev, category: undefined }))
                         }
-                        className="hover:text-indigo-900"
+                        className="hover:text-emerald-900 transition-colors"
                       >
                         <X size={14} />
                       </button>
                     </span>
                   )}
                   {filters.brand && (
-                    <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-sm px-4 py-2 rounded-full font-medium">
                       {filters.brand}
                       <button
                         onClick={() =>
                           setFilters((prev) => ({ ...prev, brand: undefined }))
                         }
-                        className="hover:text-indigo-900"
+                        className="hover:text-emerald-900 transition-colors"
                       >
                         <X size={14} />
                       </button>
                     </span>
                   )}
                   {(filters.minPrice !== undefined || filters.maxPrice !== undefined) && (
-                    <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-sm px-4 py-2 rounded-full font-medium">
                       ${filters.minPrice || 0} - ${filters.maxPrice || '∞'}
                       <button
                         onClick={() =>
@@ -553,33 +565,33 @@ export const Shop: React.FC = () => {
                             maxPrice: undefined,
                           }))
                         }
-                        className="hover:text-indigo-900"
+                        className="hover:text-emerald-900 transition-colors"
                       >
                         <X size={14} />
                       </button>
                     </span>
                   )}
                   {filters.size && (
-                    <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-sm px-4 py-2 rounded-full font-medium">
                       {filters.size}
                       <button
                         onClick={() =>
                           setFilters((prev) => ({ ...prev, size: undefined }))
                         }
-                        className="hover:text-indigo-900"
+                        className="hover:text-emerald-900 transition-colors"
                       >
                         <X size={14} />
                       </button>
                     </span>
                   )}
                   {filters.rating && (
-                    <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-700 text-sm px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-700 text-sm px-4 py-2 rounded-full font-medium">
                       {filters.rating}+ stars
                       <button
                         onClick={() =>
                           setFilters((prev) => ({ ...prev, rating: undefined }))
                         }
-                        className="hover:text-indigo-900"
+                        className="hover:text-emerald-900 transition-colors"
                       >
                         <X size={14} />
                       </button>
@@ -587,7 +599,7 @@ export const Shop: React.FC = () => {
                   )}
                   <button
                     onClick={handleClearFilters}
-                    className="text-sm text-red-600 hover:text-red-700 font-medium"
+                    className="text-sm text-red-600 hover:text-red-700 font-semibold transition-colors"
                   >
                     Clear all
                   </button>
@@ -597,10 +609,10 @@ export const Shop: React.FC = () => {
 
             {/* Products Grid */}
             {paginatedProducts.length === 0 ? (
-              <div className="bg-white rounded-lg shadow p-12 text-center">
-                <div className="mb-4">
+              <div className="bg-white rounded-3xl shadow-xl p-16 text-center">
+                <div className="mb-6">
                   <svg
-                    className="mx-auto h-24 w-24 text-gray-400"
+                    className="mx-auto h-32 w-32 text-gray-400"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -613,13 +625,13 @@ export const Shop: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   No products found
                 </h3>
-                <p className="text-gray-600 mb-6">
-                  Try adjusting your filters or search criteria
+                <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                  Try adjusting your filters or search criteria to discover more fragrances
                 </p>
-                <Button onClick={handleClearFilters} variant="primary">
+                <Button onClick={handleClearFilters} variant="primary" size="lg" className="px-8 py-4 rounded-full">
                   Clear Filters
                 </Button>
               </div>
@@ -637,13 +649,13 @@ export const Shop: React.FC = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="mt-8 flex justify-center">
-                    <nav className="flex items-center gap-2">
+                  <div className="mt-12 flex justify-center">
+                    <nav className="flex items-center gap-3">
                       {/* Previous Button */}
                       <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 font-medium"
                       >
                         Previous
                       </button>
@@ -660,9 +672,9 @@ export const Shop: React.FC = () => {
                             <button
                               key={page}
                               onClick={() => handlePageChange(page)}
-                              className={`px-4 py-2 border rounded-lg transition-colors ${
+                              className={`px-5 py-3 border rounded-full transition-all duration-300 hover:scale-110 font-semibold ${
                                 page === currentPage
-                                  ? 'bg-indigo-600 text-white border-indigo-600'
+                                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-transparent shadow-lg'
                                   : 'border-gray-300 hover:bg-gray-50'
                               }`}
                             >
@@ -673,7 +685,7 @@ export const Shop: React.FC = () => {
                           page === currentPage - 2 ||
                           page === currentPage + 2
                         ) {
-                          return <span key={page}>...</span>;
+                          return <span key={page} className="px-3 py-3 text-gray-400">...</span>;
                         }
                         return null;
                       })}
@@ -682,7 +694,7 @@ export const Shop: React.FC = () => {
                       <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-105 font-medium"
                       >
                         Next
                       </button>

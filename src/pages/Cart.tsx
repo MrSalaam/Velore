@@ -126,27 +126,39 @@ export const Cart: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-12">
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition-colors mb-4"
+            className="inline-flex items-center gap-3 text-gray-600 hover:text-emerald-600 transition-all duration-300 mb-6 font-medium"
           >
             <ArrowLeft size={20} />
             Continue Shopping
           </Link>
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-bold text-gray-900">Shopping Cart</h1>
+            <div>
+              <div className="inline-block mb-4">
+                <span className="text-emerald-600 font-medium text-sm tracking-[0.3em] uppercase">
+                  Your Cart
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-gray-900 mb-4 tracking-tight">
+                Shopping
+                <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mt-2">
+                  Cart
+                </span>
+              </h1>
+            </div>
             <button
               onClick={handleClearCart}
-              className="text-red-600 hover:text-red-700 font-medium flex items-center gap-2"
+              className="text-red-600 hover:text-red-700 font-semibold flex items-center gap-3 px-6 py-3 border border-red-300 rounded-full hover:bg-red-50 transition-all duration-300 hover:scale-105"
             >
               <Trash2 size={18} />
               Clear Cart
             </button>
           </div>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-lg mt-4">
             {items.length} {items.length === 1 ? 'item' : 'items'} in your cart
           </p>
         </div>
@@ -165,7 +177,7 @@ export const Cart: React.FC = () => {
               return (
                 <div
                   key={`${item.productId}-${item.selectedSize}`}
-                  className="bg-white rounded-lg shadow p-6"
+                  className="bg-white rounded-3xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex gap-6">
                     {/* Product Image */}
@@ -281,69 +293,69 @@ export const Cart: React.FC = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow p-6 sticky top-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Order Summary</h2>
+            <div className="bg-white rounded-3xl shadow-xl p-8 sticky top-4">
+              <h2 className="text-2xl font-bold text-gray-900 mb-8">Order Summary</h2>
 
               {/* Coupon Code */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="mb-8">
+                <label className="block text-base font-bold text-gray-900 mb-4">
                   Coupon Code
                 </label>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <div className="relative flex-1">
                     <Tag
-                      size={18}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                      size={20}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
                     />
                     <input
                       type="text"
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                       placeholder="Enter code"
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full pl-12 pr-6 py-4 border-2 border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 font-medium transition-all duration-300"
                       disabled={!!appliedCoupon}
                     />
                   </div>
                   {appliedCoupon ? (
-                    <Button onClick={handleRemoveCoupon} variant="outline">
+                    <Button onClick={handleRemoveCoupon} variant="outline" className="px-6 py-4 rounded-full font-semibold">
                       Remove
                     </Button>
                   ) : (
-                    <Button onClick={handleApplyCoupon} variant="primary">
+                    <Button onClick={handleApplyCoupon} variant="primary" className="px-6 py-4 rounded-full font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700">
                       Apply
                     </Button>
                   )}
                 </div>
                 {appliedCoupon && (
-                  <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
-                    <Tag size={14} />
+                  <p className="text-sm text-emerald-600 mt-3 flex items-center gap-2 font-medium">
+                    <Tag size={16} />
                     Coupon "{appliedCoupon}" applied
                   </p>
                 )}
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-sm text-gray-500 mt-3 font-medium">
                   Try: SAVE10, SAVE20, or WELCOME15
                 </p>
               </div>
 
               {/* Price Breakdown */}
-              <div className="space-y-3 mb-6 pb-6 border-b border-gray-200">
+              <div className="space-y-4 mb-8 pb-8 border-b border-gray-200">
                 <div className="flex items-center justify-between text-gray-700">
-                  <span>Subtotal</span>
-                  <span className="font-medium">{formatCurrency(subtotal)}</span>
+                  <span className="text-base font-medium">Subtotal</span>
+                  <span className="font-bold text-lg">{formatCurrency(subtotal)}</span>
                 </div>
 
                 {discount > 0 && (
-                  <div className="flex items-center justify-between text-green-600">
-                    <span>Discount</span>
-                    <span className="font-medium">-{formatCurrency(discount)}</span>
+                  <div className="flex items-center justify-between text-emerald-600">
+                    <span className="text-base font-medium">Discount</span>
+                    <span className="font-bold text-lg">-{formatCurrency(discount)}</span>
                   </div>
                 )}
 
                 <div className="flex items-center justify-between text-gray-700">
-                  <span>Shipping</span>
-                  <span className="font-medium">
+                  <span className="text-base font-medium">Shipping</span>
+                  <span className="font-bold text-lg">
                     {shippingCost === 0 ? (
-                      <span className="text-green-600">FREE</span>
+                      <span className="text-emerald-600">FREE</span>
                     ) : (
                       formatCurrency(shippingCost)
                     )}
@@ -351,8 +363,8 @@ export const Cart: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between text-gray-700">
-                  <span>Tax (Estimated)</span>
-                  <span className="font-medium">{formatCurrency(tax)}</span>
+                  <span className="text-base font-medium">Tax (Estimated)</span>
+                  <span className="font-bold text-lg">{formatCurrency(tax)}</span>
                 </div>
 
                 {/* Free Shipping Progress */}
@@ -372,7 +384,7 @@ export const Cart: React.FC = () => {
               </div>
 
               {/* Total */}
-              <div className="flex items-center justify-between text-xl font-bold text-gray-900 mb-6">
+              <div className="flex items-center justify-between text-2xl font-bold text-gray-900 mb-8">
                 <span>Total</span>
                 <span>{formatCurrency(finalTotal)}</span>
               </div>
@@ -383,13 +395,13 @@ export const Cart: React.FC = () => {
                 variant="primary"
                 size="lg"
                 fullWidth
-                className="mb-3"
+                className="mb-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Proceed to Checkout
               </Button>
 
               <Link to="/shop">
-                <Button variant="outline" size="lg" fullWidth>
+                <Button variant="outline" size="lg" fullWidth className="font-semibold py-4 rounded-full border-2 hover:bg-emerald-50 hover:border-emerald-400 transition-all duration-300">
                   Continue Shopping
                 </Button>
               </Link>

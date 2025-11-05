@@ -187,6 +187,7 @@ const bestSellers: Product[] = [
     category: 'women',
     inStock: true,
     stock: 89,
+    featured: true,
     sizes: [
       { size: '50ml', price: 295, stock: 45 },
       { size: '100ml', price: 395, stock: 44 }
@@ -210,6 +211,7 @@ const bestSellers: Product[] = [
     category: 'men',
     inStock: true,
     stock: 134,
+    featured: true,
     sizes: [
       { size: '50ml', price: 210, stock: 50 },
       { size: '75ml', price: 260, stock: 44 },
@@ -235,6 +237,7 @@ const bestSellers: Product[] = [
     category: 'unisex',
     inStock: true,
     stock: 56,
+    featured: true,
     sizes: [
       { size: '50ml', price: 340, stock: 28 },
       { size: '100ml', price: 440, stock: 28 }
@@ -258,6 +261,7 @@ const bestSellers: Product[] = [
     category: 'women',
     inStock: true,
     stock: 72,
+    featured: true,
     sizes: [
       { size: '30ml', price: 275, stock: 25 },
       { size: '50ml', price: 325, stock: 24 },
@@ -282,6 +286,7 @@ const bestSellers: Product[] = [
     category: 'men',
     inStock: true,
     stock: 41,
+    featured: true,
     sizes: [
       { size: '50ml', price: 365, stock: 21 },
       { size: '100ml', price: 465, stock: 20 }
@@ -841,418 +846,411 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Best Sellers 3D Card Stack - Premium Redesign */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-indigo-500/20 to-teal-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        </div>
-
-        {/* Animated Grid Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-            animation: 'gridMove 20s linear infinite'
-          }}></div>
-        </div>
+      {/* Best Sellers - Modern Bento Grid */}
+      <section className="relative py-20 md:py-32 bg-gradient-to-br from-teal-50 to-emerald-300 overflow-hidden">
+        {/* Background Decorations */}
+       
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-16 md:mb-20">
-            <div className="inline-block mb-4">
-              <span className="text-emerald-400 font-medium text-sm tracking-[0.3em] uppercase">
+          <div className="max-w-3xl mb-12 md:mb-16">
+             <span className="text-emerald-600 font-medium text-sm tracking-[0.3em] uppercase">
                 Customer Favorites
               </span>
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-white mb-6 tracking-tight">
-              Best
-              <span className="block font-semibold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mt-2">
-                Sellers
-              </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light text-gray-900 mb-4 tracking-tight">
+                Best Sellers
+                <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mt-2">
+                  Loved by Many
+                </span>
             </h2>
-            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Discover the fragrances loved by thousands of satisfied customers
+            
+            <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-2xl">
+              Discover why these fragrances have captured thousands of hearts worldwide
             </p>
           </div>
 
-          {/* 3D Card Stack Container */}
-          <div 
-            className="relative h-[650px] md:h-[700px] lg:h-[750px] flex items-center justify-center touch-pan-y"
-            onMouseEnter={() => !isMobile && setIsAutoRotating(false)}
-            onMouseLeave={() => !isMobile && setIsAutoRotating(true)}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            style={{ perspective: '2500px' }}
-          >
-            {getStackedCards().map((item) => {
-              const position = item.position;
-              const isActive = position === 0;
-              const zIndex = bestSellers.length - position;
-              
-              // Calculate transformations for 3D stack effect
-              const getTransform = () => {
-                if (position === 0) {
-                  return 'translateX(0) translateY(0) translateZ(0) rotateY(0deg) scale(1)';
-                } else if (position === 1) {
-                  return 'translateX(60px) translateY(30px) translateZ(-100px) rotateY(-8deg) scale(0.95)';
-                } else if (position === 2) {
-                  return 'translateX(120px) translateY(60px) translateZ(-200px) rotateY(-15deg) scale(0.9)';
-                } else if (position === bestSellers.length - 1) {
-                  return 'translateX(-60px) translateY(30px) translateZ(-100px) rotateY(8deg) scale(0.95)';
-                } else if (position === bestSellers.length - 2) {
-                  return 'translateX(-120px) translateY(60px) translateZ(-200px) rotateY(15deg) scale(0.9)';
-                } else {
-                  return 'translateX(0) translateY(90px) translateZ(-300px) rotateY(0deg) scale(0.85)';
-                }
-              };
+          {/* Bento Grid Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6 auto-rows-fr">
+            
+            {/* Card 1 - Featured Large (Full width mobile, spans 7 cols desktop) */}
+            <div 
+              className="lg:col-span-7 lg:row-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 via-emerald-950 to-gray-900 min-h-[500px] sm:min-h-[600px]"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0s both' }}
+            >
+              {/* Background Image */}
+              <div className="absolute inset-0">
+                <img
+                  src={bestSellers[0].images[0]}
+                  alt={bestSellers[0].name}
+                  className="w-full h-full object-cover opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent" />
+              </div>
 
-              const getOpacity = () => {
-                if (position === 0) return 1;
-                if (position <= 2 || position >= bestSellers.length - 2) return 0.6;
-                return 0.2;
-              };
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-between p-6 md:p-8 lg:p-10">
+                {/* Top */}
+                <div className="flex items-start justify-between">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-amber-400 text-gray-900 font-bold text-sm shadow-xl">
+                    <Star size={16} className="fill-current" />
+                    <span>#1 Bestseller</span>
+                  </div>
+                  
+                  <button
+                    onClick={() => handleToggleWishlist(bestSellers[0].id)}
+                    className={`p-3 rounded-full backdrop-blur-xl transition-all duration-300 shadow-lg hover:scale-110 ${
+                      isInWishlist(bestSellers[0].id) 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-white/90 text-gray-900 hover:bg-white'
+                    }`}
+                  >
+                    <Heart size={20} className={isInWishlist(bestSellers[0].id) ? 'fill-current' : ''} />
+                  </button>
+                </div>
 
-              return (
-                <div
-                  key={item.id}
-                  className="absolute transition-all duration-700 ease-out cursor-pointer select-none"
-                  style={{
-                    transform: getTransform(),
-                    opacity: getOpacity(),
-                    zIndex: zIndex,
-                  }}
-                  onClick={() => {
-                    if (position !== 0) {
-                      setCurrentBestSeller((currentBestSeller + position) % bestSellers.length);
-                    }
-                  }}
-                >
-                  {/* Product Card */}
-                  <div className={`bg-white rounded-3xl shadow-2xl overflow-hidden w-[340px] md:w-[380px] lg:w-[420px] transform transition-all duration-500 ${
-                    isActive ? 'ring-4 ring-emerald-400/50 shadow-emerald-500/30' : ''
-                  }`}>
-                    {/* Image Container */}
-                    <div className="relative aspect-[4/5] overflow-hidden bg-gray-50 group">
-                      {/* Gradient Overlay */}
-                      <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-500 z-10 ${
-                        isActive ? 'opacity-100' : 'opacity-60'
-                      }`}></div>
-
-                      {/* Premium Shine Effect */}
-                      <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 z-20 ${
-                        isActive ? 'animate-shine' : '-translate-x-full'
-                      }`}></div>
-
-                      {/* Product Image */}
-                      <img
-                        src={item.images[0]}
-                        alt={item.name}
-                        className={`w-full h-full object-cover transition-all duration-700 ${
-                          isActive ? 'scale-100' : 'scale-110'
-                        }`}
-                      />
-
-                      {/* Rank Badge - Top Left */}
-                      <div className="absolute top-4 left-4 z-30">
-                        <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full blur-lg opacity-75"></div>
-                          <div className="relative bg-gradient-to-r from-yellow-400 to-orange-400 text-white w-16 h-16 rounded-full shadow-2xl flex flex-col items-center justify-center border-2 border-white/50">
-                            <span className="text-xs font-bold uppercase">Top</span>
-                            <span className="text-2xl font-extrabold leading-none">
-                              #{bestSellers.findIndex(p => p.id === item.id) + 1}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Bestseller Badge - Top Right */}
-                      <div className="absolute top-4 right-4 z-30">
-                        <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2 backdrop-blur-sm border border-white/30">
-                          <Star size={14} className="fill-current" />
-                          BESTSELLER
-                        </div>
-                      </div>
-
-                      {/* Discount Badge */}
-                      {item.discount && (
-                        <div className="absolute top-20 right-4 z-30">
-                          <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg animate-bounce">
-                            SAVE {item.discount}%
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Wishlist Button - Active Card Only */}
-                      {isActive && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleToggleWishlist(item.id);
-                          }}
-                          className={`absolute bottom-4 right-4 z-30 p-3 rounded-full backdrop-blur-md transition-all duration-300 transform hover:scale-110 ${
-                            isInWishlist(item.id)
-                              ? 'bg-red-500 text-white shadow-lg'
-                              : 'bg-white/90 text-gray-600 hover:bg-white shadow-md'
-                          }`}
-                          aria-label={isInWishlist(item.id) ? 'Remove from wishlist' : 'Add to wishlist'}
-                        >
-                          <Heart
-                            size={20}
-                            className={isInWishlist(item.id) ? 'fill-current' : ''}
-                          />
-                        </button>
-                      )}
-
-                      {/* Bottom Info Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 z-20 p-6 text-white">
-                        <div className="flex items-center justify-between mb-2">
-                          <p className="text-sm font-semibold tracking-wide uppercase text-emerald-300">
-                            {item.brand}
-                          </p>
-                          <div className="flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <Star size={14} className="fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm font-bold">
-                              {item.rating}
-                            </span>
-                          </div>
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-bold mb-2 line-clamp-1">
-                          {item.name}
-                        </h3>
-                        <p className="text-gray-200 text-sm line-clamp-2 mb-3">
-                          {item.description}
-                        </p>
-                      </div>
+                {/* Bottom */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <span className="text-emerald-400 text-sm font-bold uppercase tracking-wider">
+                      {bestSellers[0].brand}
+                    </span>
+                    <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md">
+                      <Star size={14} className="fill-yellow-400 text-yellow-400" />
+                      <span className="text-white text-sm font-bold">{bestSellers[0].rating}</span>
                     </div>
+                  </div>
+                  
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                    {bestSellers[0].name}
+                  </h3>
+                  
+                  <p className="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl">
+                    {bestSellers[0].description}
+                  </p>
 
-                    {/* Product Details */}
-                    <div className="p-6 md:p-8">
-                      {/* Rating Details */}
-                      <div className="flex items-center gap-2 mb-5">
-                        <div className="flex items-center">
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <Star
-                              key={i}
-                              size={18}
-                              className={
-                                i < Math.floor(item.rating)
-                                  ? 'fill-yellow-400 text-yellow-400'
-                                  : 'text-gray-300'
-                              }
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm text-gray-600 font-semibold">
-                          ({item.reviewCount} reviews)
-                        </span>
-                      </div>
-
-                      {/* Price Container */}
-                      <div className="flex items-center justify-between mb-6 pb-6 border-b-2 border-gray-100">
-                        <div className="flex flex-col">
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                              {formatCurrency(
-                                item.discount
-                                  ? item.price * (1 - item.discount / 100)
-                                  : item.price
-                              )}
-                            </span>
-                            {item.discount && (
-                              <span className="text-lg text-gray-400 line-through">
-                                {formatCurrency(item.price)}
-                              </span>
-                            )}
-                          </div>
-                          {item.discount && (
-                            <span className="text-sm text-emerald-600 font-bold mt-1">
-                              You save {formatCurrency(item.price * (item.discount / 100))}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Stock Status */}
-                        <div className="flex flex-col items-end">
-                          <div className={`px-4 py-2 rounded-full text-xs font-bold shadow-md ${
-                            item.stock > 50 
-                              ? 'bg-emerald-100 text-emerald-700'
-                              : item.stock > 20
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'bg-red-100 text-red-700'
-                          }`}>
-                            {item.stock > 50 ? 'In Stock' : item.stock > 20 ? 'Limited' : 'Low Stock'}
-                          </div>
-                          <span className="text-xs text-gray-500 mt-1 font-medium">
-                            {item.stock} units left
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Fragrance Notes */}
-                      <div className="mb-6">
-                        <p className="text-xs text-gray-500 mb-3 font-bold uppercase tracking-wider">
-                          Signature Notes
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {item.fragrance.topNotes.slice(0, 2).map((note, idx) => (
-                            <span 
-                              key={idx}
-                              className="text-xs bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 px-3 py-2 rounded-full font-semibold border border-emerald-200"
-                            >
-                              {note}
-                            </span>
-                          ))}
-                          {item.fragrance.middleNotes.slice(0, 1).map((note, idx) => (
-                            <span 
-                              key={idx}
-                              className="text-xs bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 px-3 py-2 rounded-full font-semibold border border-purple-200"
-                            >
-                              {note}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Add to Cart Button - Only for Active Card */}
-                      {isActive && (
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleAddToCart(item);
-                          }}
-                          className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-4 px-6 rounded-full hover:shadow-2xl hover:shadow-emerald-500/50 transition-all duration-300 flex items-center justify-center gap-3 group/btn transform hover:scale-105"
-                        >
-                          <ShoppingCart size={22} className="group-hover/btn:scale-110 transition-transform" />
-                          <span className="text-lg">Add to Cart</span>
-                        </button>
-                      )}
-                    </div>
-
-                    {/* Hover Border Glow - Only for Active Card */}
-                    {isActive && (
-                      <div className="absolute inset-0 rounded-3xl border-2 border-emerald-400/50 transition-all duration-500 pointer-events-none animate-pulse"></div>
-                    )}
+                  <div className="flex flex-wrap gap-2">
+                    {bestSellers[0].fragrance.topNotes.slice(0, 3).map((note, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 text-sm font-medium border border-emerald-500/30"
+                      >
+                        {note}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Floating Glow Effect - Only for Active Card */}
-                  {isActive && (
-                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-10 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent rounded-full blur-2xl animate-pulse"></div>
-                  )}
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+                    <div>
+                      <span className="text-gray-400 text-sm block mb-1">Starting from</span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl md:text-4xl font-bold text-white">
+                          {formatCurrency(
+                            bestSellers[0].discount
+                              ? bestSellers[0].price * (1 - bestSellers[0].discount / 100)
+                              : bestSellers[0].price
+                          )}
+                        </span>
+                        {bestSellers[0].discount && (
+                          <span className="text-lg text-gray-500 line-through">
+                            {formatCurrency(bestSellers[0].price)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <button
+                      onClick={() => handleAddToCart(bestSellers[0])}
+                      className="w-full sm:w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-bold hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2"
+                    >
+                      <ShoppingCart size={20} />
+                      <span>Add to Cart</span>
+                    </button>
+                  </div>
                 </div>
-              );
-            })}
-
-            {/* Navigation Arrows - Desktop Only */}
-            {!isMobile && (
-              <>
-                <button
-                  onClick={prevBestSeller}
-                  className="absolute left-4 md:left-8 lg:left-16 z-20 bg-white/95 hover:bg-white p-4 md:p-5 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-x-1 group"
-                  aria-label="Previous product"
-                >
-                  <ChevronLeft size={28} className="text-gray-900 group-hover:text-emerald-600 transition-colors" />
-                </button>
-                <button
-                  onClick={nextBestSeller}
-                  className="absolute right-4 md:right-8 lg:right-16 z-20 bg-white/95 hover:bg-white p-4 md:p-5 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:translate-x-1 group"
-                  aria-label="Next product"
-                >
-                  <ChevronRight size={28} className="text-gray-900 group-hover:text-emerald-600 transition-colors" />
-                </button>
-              </>
-            )}
-          </div>
-
-          {/* Swipe Indicator - Mobile Only */}
-          {isMobile && (
-            <div className="flex justify-center mt-8 md:hidden">
-              <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full">
-                <p className="text-white/70 text-sm font-medium flex items-center gap-2">
-                  <ChevronLeft size={16} />
-                  Swipe to browse
-                  <ChevronRight size={16} />
-                </p>
               </div>
             </div>
-          )}
 
-          {/* Progress Indicators */}
-          <div className="flex justify-center gap-3 mt-12">
-            {bestSellers.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentBestSeller(index)}
-                className={`transition-all duration-500 rounded-full ${
-                  index === currentBestSeller
-                    ? 'w-16 h-3 bg-gradient-to-r from-emerald-400 to-teal-400 shadow-lg shadow-emerald-400/50'
-                    : 'w-3 h-3 bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`Go to product ${index + 1}`}
-              />
-            ))}
+            {/* Card 2 - Medium Vertical (spans 5 cols desktop) */}
+            <div 
+              className="lg:col-span-5 lg:row-span-1 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-teal-50 min-h-[350px]"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0.1s both' }}
+            >
+              <div className="relative h-full p-6 flex flex-col sm:flex-row lg:flex-col gap-4">
+                {/* Image */}
+                <div className="relative w-full sm:w-2/5 lg:w-full h-48 sm:h-auto lg:h-48 rounded-2xl overflow-hidden flex-shrink-0">
+                  <img
+                    src={bestSellers[1].images[0]}
+                    alt={bestSellers[1].name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-white shadow-md font-bold text-sm text-gray-900">
+                    #2
+                  </div>
+                  <button
+                    onClick={() => handleToggleWishlist(bestSellers[1].id)}
+                    className={`absolute top-3 right-3 p-2.5 rounded-full transition-all duration-300 shadow-md hover:scale-110 ${
+                      isInWishlist(bestSellers[1].id) 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-white text-gray-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Heart size={18} className={isInWishlist(bestSellers[1].id) ? 'fill-current' : ''} />
+                  </button>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-emerald-700 text-xs font-bold uppercase tracking-wider">
+                      {bestSellers[1].brand}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mt-2 mb-2">
+                      {bestSellers[1].name}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                      {bestSellers[1].description}
+                    </p>
+                    <div className="flex items-center gap-1">
+                      <Star size={14} className="fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm font-bold text-gray-900">{bestSellers[1].rating}</span>
+                      <span className="text-xs text-gray-500">({bestSellers[1].reviewCount})</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-emerald-100 mt-4">
+                    <span className="text-2xl font-bold text-gray-900">
+                      {formatCurrency(
+                        bestSellers[1].discount
+                          ? bestSellers[1].price * (1 - bestSellers[1].discount / 100)
+                          : bestSellers[1].price
+                      )}
+                    </span>
+                    <button
+                      onClick={() => handleAddToCart(bestSellers[1])}
+                      className="p-3 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+                    >
+                      <ShoppingCart size={18} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 - Compact (spans 3 cols desktop) */}
+            <div 
+              className="lg:col-span-3 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-50 to-pink-50 min-h-[280px]"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0.2s both' }}
+            >
+              <div className="relative h-full p-5 flex flex-col">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="px-3 py-1 rounded-full bg-white shadow-md font-bold text-sm">#3</div>
+                  <button
+                    onClick={() => handleToggleWishlist(bestSellers[2].id)}
+                    className={`p-2 rounded-full transition-all shadow-md hover:scale-110 ${
+                      isInWishlist(bestSellers[2].id) 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-white text-gray-600'
+                    }`}
+                  >
+                    <Heart size={16} className={isInWishlist(bestSellers[2].id) ? 'fill-current' : ''} />
+                  </button>
+                </div>
+
+                <div className="flex-1 rounded-2xl overflow-hidden mb-4">
+                  <img
+                    src={bestSellers[2].images[0]}
+                    alt={bestSellers[2].name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div>
+                  <span className="text-purple-700 text-xs font-bold uppercase">{bestSellers[2].brand}</span>
+                  <h3 className="text-base font-bold text-gray-900 mt-1 mb-2 line-clamp-1">{bestSellers[2].name}</h3>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-gray-900">
+                      {formatCurrency(
+                        bestSellers[2].discount
+                          ? bestSellers[2].price * (1 - bestSellers[2].discount / 100)
+                          : bestSellers[2].price
+                      )}
+                    </span>
+                    <button
+                      onClick={() => handleAddToCart(bestSellers[2])}
+                      className="p-2.5 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all shadow-lg hover:scale-110"
+                    >
+                      <ShoppingCart size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4 - Compact (spans 2 cols desktop) */}
+            <div 
+              className="lg:col-span-2 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-50 to-amber-50 min-h-[280px]"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0.3s both' }}
+            >
+              <div className="relative h-full p-5 flex flex-col">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="px-3 py-1 rounded-full bg-white shadow-md font-bold text-sm">#4</div>
+                  <button
+                    onClick={() => handleToggleWishlist(bestSellers[3].id)}
+                    className={`p-2 rounded-full transition-all shadow-md hover:scale-110 ${
+                      isInWishlist(bestSellers[3].id) 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-white text-gray-600'
+                    }`}
+                  >
+                    <Heart size={16} className={isInWishlist(bestSellers[3].id) ? 'fill-current' : ''} />
+                  </button>
+                </div>
+
+                <div className="flex-1 rounded-2xl overflow-hidden mb-4">
+                  <img
+                    src={bestSellers[3].images[0]}
+                    alt={bestSellers[3].name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div>
+                  <span className="text-orange-700 text-xs font-bold uppercase">{bestSellers[3].brand}</span>
+                  <h3 className="text-base font-bold text-gray-900 mt-1 mb-2 line-clamp-1">{bestSellers[3].name}</h3>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-gray-900">
+                      {formatCurrency(
+                        bestSellers[3].discount
+                          ? bestSellers[3].price * (1 - bestSellers[3].discount / 100)
+                          : bestSellers[3].price
+                      )}
+                    </span>
+                    <button
+                      onClick={() => handleAddToCart(bestSellers[3])}
+                      className="p-2.5 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition-all shadow-lg hover:scale-110"
+                    >
+                      <ShoppingCart size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 5 - Wide Feature (spans full width on mobile, 12 cols desktop) */}
+            <div 
+              className="lg:col-span-12 group relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 min-h-[300px]"
+              style={{ animation: 'fadeInUp 0.6s ease-out 0.4s both' }}
+            >
+              <div className="relative h-full grid grid-cols-1 sm:grid-cols-5 gap-6 p-6 md:p-8">
+                {/* Image */}
+                <div className="sm:col-span-2 relative rounded-2xl overflow-hidden h-64 sm:h-auto">
+                  <img
+                    src={bestSellers[4].images[0]}
+                    alt={bestSellers[4].name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-3 left-3 flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm font-bold text-sm shadow-md">
+                    <Star size={14} className="fill-yellow-400 text-yellow-400" />
+                    #5
+                  </div>
+                  <button
+                    onClick={() => handleToggleWishlist(bestSellers[4].id)}
+                    className={`absolute top-3 right-3 p-2 rounded-lg transition-all shadow-md hover:scale-110 ${
+                      isInWishlist(bestSellers[4].id) 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-white/90 text-gray-600'
+                    }`}
+                  >
+                    <Heart size={16} className={isInWishlist(bestSellers[4].id) ? 'fill-current' : ''} />
+                  </button>
+                </div>
+
+                {/* Content */}
+                <div className="sm:col-span-3 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
+                      <span className="text-indigo-700 text-sm font-bold uppercase tracking-wider mb-1 block">
+                        {bestSellers[4].brand}
+                      </span>
+                      <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-indigo-100">
+                        <Star size={14} className="fill-yellow-400 text-yellow-400" />
+                        <span className="text-gray-900 text-sm font-bold">{bestSellers[4].rating}</span>
+                      </div>
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                      {bestSellers[4].name}
+                    </h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                      {bestSellers[4].description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {bestSellers[4].fragrance.topNotes.slice(0, 3).map((note, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-medium"
+                        >
+                          {note}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-indigo-100">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl font-bold text-gray-900">
+                        {formatCurrency(
+                          bestSellers[4].discount
+                            ? bestSellers[4].price * (1 - bestSellers[4].discount / 100)
+                            : bestSellers[4].price
+                        )}
+                      </span>
+                      {bestSellers[4].discount && (
+                        <span className="text-lg text-gray-500 line-through">
+                          {formatCurrency(bestSellers[4].price)}
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => handleAddToCart(bestSellers[4])}
+                      className="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white rounded-full font-semibold hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2"
+                    >
+                      <ShoppingCart size={18} />
+                      <span>Add to Cart</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Auto-rotate Control - Desktop Only */}
-          {!isMobile && (
-            <div className="flex justify-center mt-8">
-              <button
-                onClick={() => setIsAutoRotating(!isAutoRotating)}
-                className="text-white/70 hover:text-white text-sm font-medium transition-colors duration-300 flex items-center gap-2"
-              >
-                {isAutoRotating ? (
-                  <>
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    Auto-rotating
-                  </>
-                ) : (
-                  <>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                    Paused (hover to pause)
-                  </>
-                )}
+          {/* Bottom CTA */}
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 p-6 md:p-8 rounded-3xl bg-gradient-to-r from-emerald-600 to-teal-600 shadow-2xl">
+            <div className="text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Explore Our Full Collection
+              </h3>
+              <p className="text-emerald-50 text-base md:text-lg">
+                Over 200+ premium fragrances waiting to be discovered
+              </p>
+            </div>
+            
+            <Link to="/shop">
+              <button className="group px-8 py-4 bg-white text-emerald-600 rounded-full font-bold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 flex items-center gap-3 whitespace-nowrap">
+                <span>Shop All</span>
+                <ChevronRight 
+                  size={20} 
+                  className="group-hover:translate-x-1 transition-transform" 
+                />
               </button>
-            </div>
-          )}
-
-          {/* Bottom Stats */}
-          <div className="grid grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {bestSellers.reduce((sum, p) => sum + p.reviewCount, 0).toLocaleString()}+
-              </div>
-              <div className="text-emerald-300 text-sm font-medium">
-                Happy Customers
-              </div>
-            </div>
-            <div className="text-center border-x border-white/20">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                4.9
-              </div>
-              <div className="text-emerald-300 text-sm font-medium">
-                Average Rating
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {bestSellers.length}
-              </div>
-              <div className="text-emerald-300 text-sm font-medium">
-                Top Sellers
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Decorative Element */}
-          <div className="mt-12 flex justify-center">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-              <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></div>
-              <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
